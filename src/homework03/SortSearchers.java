@@ -9,21 +9,21 @@ public class SortSearchers {
 
     // Constant Variables
     private final static String firstColumn = "%-8s";
-    private final static String secondColumn = "%-6s";
+    private final static String secondColumn = "%6s";
     private final static String indexColumn = "%-8d";
-    private final static String valueColumn = "%-6d";
+    private final static String valueColumn = "%6d";
 
     //------------------------------------------------------------------
     // randomizeArrayList
     //------------------------------------------------------------------
     private static void randomizeArrayList(ArrayList<Integer> al,
-                                           int newElements, int upperLimit)
+                                           int newElements)
     {
 
         // Loop to generate and store random numbers in ArrayList
         Random rand = new Random();
         for (int i = 1; i <= newElements; i++)
-            al.add(rand.nextInt(upperLimit) + 1);
+            al.add(rand.nextInt(10000) + 1);
 
     }
 
@@ -92,11 +92,12 @@ public class SortSearchers {
 
 
         // Creating random values in ArrayList with user input amount
-        randomizeArrayList(arrList, userAmount, 1000);
+        randomizeArrayList(arrList, userAmount);
 
         System.out.println("First 10 unsorted values in array list");
         printArrayList(arrList);
 
+        // Sorting array list and tracking time to do it in nanoseconds
         before = System.nanoTime();
         insertionSort(arrList);
         after = System.nanoTime();
