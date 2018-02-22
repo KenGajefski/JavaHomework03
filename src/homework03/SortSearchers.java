@@ -9,9 +9,9 @@ public class SortSearchers {
 
     // Constant Variables
     private final static String firstColumn = "%-8s";
-    private final static String secondColumn = "%6s";
+    private final static String secondColumn = "%10s";
     private final static String indexColumn = "%-8d";
-    private final static String valueColumn = "%6.2f";
+    private final static String valueColumn = "%,10.2f";
 
     //------------------------------------------------------------------
     // randomizeArrayList
