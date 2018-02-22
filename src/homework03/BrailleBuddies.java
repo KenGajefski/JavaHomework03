@@ -45,7 +45,7 @@ public class BrailleBuddies {
         String userInput;
         Scanner keyboard = new Scanner(System.in);
 
-
+        // TESTING
 
         System.out.println("Welcome to Braille Buddies");
         System.out.println("--------------------------");
