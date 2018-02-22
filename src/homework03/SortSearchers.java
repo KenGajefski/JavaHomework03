@@ -13,8 +13,6 @@ public class SortSearchers {
     private final static String indexColumn = "%-8d";
     private final static String valueColumn = "%-6d";
 
-
-
     //------------------------------------------------------------------
     // randomizeArrayList
     //------------------------------------------------------------------
@@ -49,6 +47,7 @@ public class SortSearchers {
     private static void insertionSort(ArrayList<Integer> al)
     {
         int n = al.size();
+
         for (int i = 0; i < n; i++)
         {
             int key = al.get(i);
@@ -59,15 +58,20 @@ public class SortSearchers {
                 al.set(j + 1, al.get(j));
                 j = j - 1;
             }
+
             al.set(j + 1, key);
         }
     }
-    
 
+    //------------------------------------------------------------------
+    // Main
+    //------------------------------------------------------------------
     public static void main(String[] args) {
 
         // Variables
-        int userUpperLimit;
+        int userAmount;
+        long before;
+        long after;
 
         Scanner keyboard = new Scanner(System.in);
 
@@ -77,24 +81,30 @@ public class SortSearchers {
         System.out.println("--------------------------");
         System.out.println();
         System.out.print("Enter an amount of values to be generated in the ArrayList (up to 10,000): ");
-        userUpperLimit = keyboard.nextInt();
+        userAmount = keyboard.nextInt();
 
         // Validating user input to be over 10 and under 10,000
-        while (userUpperLimit < 10 || userUpperLimit > 10000){
+        while (userAmount < 10 || userAmount > 10000){
             System.out.println("Invalid value.");
             System.out.print("Enter an amount of values to be generated in the ArrayList (up to 10,000): ");
-            userUpperLimit = keyboard.nextInt();
+            userAmount = keyboard.nextInt();
         }
 
+
         // Creating random values in ArrayList with user input amount
-        randomizeArrayList(arrList, userUpperLimit, 1000);
+        randomizeArrayList(arrList, userAmount, 1000);
 
         System.out.println("First 10 unsorted values in array list");
         printArrayList(arrList);
 
+        before = System.nanoTime();
         insertionSort(arrList);
+        after = System.nanoTime();
+        System.out.println("Time to sort through array (in nanoseconds): " + (after - before));
+
         System.out.println("First 10 sorted values in array list");
         printArrayList(arrList);
     }
+    // End of main
 }
-// End of main
+// End of class
