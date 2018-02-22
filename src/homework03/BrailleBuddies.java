@@ -54,10 +54,13 @@ public class BrailleBuddies {
         userInput = keyboard.nextLine();
 
         for (int i = 0; i < userInput.length(); i++) {
-            char letter = userInput.charAt(i);
-            while (letter.matches(regexExp)) {
+            // Casting letter at value of i in
+            int letter = userInput.charAt(i);
+            while ((letter < 65 && letter != 32) || (letter > 90 && letter < 97) || (letter > 172)) {
                 System.out.println("Invalid input. Input should not contain any special characters or numbers.");
                 userInput = keyboard.nextLine();
+                letter = userInput.charAt(0);
+                i = 0;
             }
         }
 
