@@ -5,7 +5,7 @@ import java.util.Scanner;
 public class BrailleBuddies {
 
     // 3D array for braille characters
-    final int[][][] BRAILLE_GRIDS =
+    static final int[][][] BRAILLE_GRIDS =
             {
                     {{ 1, 0}, { 0, 0}, { 0, 0}},  // 'a' - 0
                     {{ 1, 0}, { 1, 0}, { 0, 0}},  // 'b' - 1
@@ -45,26 +45,34 @@ public class BrailleBuddies {
         String userInput;
         Scanner keyboard = new Scanner(System.in);
 
-        // TESTING
+
 
         System.out.println("Welcome to Braille Buddies");
         System.out.println("--------------------------");
         System.out.println();
-        System.out.println("Enter a word or sentence below to be converted to braille: ");
+        System.out.println("Enter a word or sentence below to be converted to braille ('q' to exit): ");
         userInput = keyboard.nextLine();
 
-        for (int i = 0; i < userInput.length(); i++) {
-            // Casting letter at value of i in
-            int letter = userInput.charAt(i);
-            while ((letter < 65 && letter != 32) || (letter > 90 && letter < 97) || (letter > 172)) {
-                System.out.println("Invalid input. Input should not contain any special characters or numbers.");
-                userInput = keyboard.nextLine();
-                letter = userInput.charAt(0);
-                i = 0;
-            }
-        }
+        while(!userInput.equals("q")) {
 
-        System.out.println(userInput);
+            // Validation loop
+            for (int i = 0; i < userInput.length(); i++) {
+                // Casting letter at value of i in
+                int letter = userInput.charAt(i);
+                while ((letter < 65 && letter != 32) || (letter > 90 && letter < 97) || (letter > 172)) {
+                    System.out.println("Invalid input. Input should not contain any special characters or numbers.");
+                    userInput = keyboard.nextLine();
+                    letter = userInput.charAt(0);
+                    i = 0;
+                }
+            }
+
+            System.out.println(userInput);
+            System.out.println("Enter a word or sentence below to be converted to braille ('q' to exit): ");
+            userInput = keyboard.nextLine();
+
+
+        }
 
 
     }
