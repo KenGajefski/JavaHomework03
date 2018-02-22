@@ -11,26 +11,26 @@ public class SortSearchers {
     private final static String firstColumn = "%-8s";
     private final static String secondColumn = "%6s";
     private final static String indexColumn = "%-8d";
-    private final static String valueColumn = "%6d";
+    private final static String valueColumn = "%6.2f";
 
     //------------------------------------------------------------------
     // randomizeArrayList
     //------------------------------------------------------------------
-    private static void randomizeArrayList(ArrayList<Integer> al,
+    private static void randomizeArrayList(ArrayList<Double> al,
                                            int newElements)
     {
 
         // Loop to generate and store random numbers in ArrayList
         Random rand = new Random();
         for (int i = 1; i <= newElements; i++)
-            al.add(rand.nextInt(10000) + 1);
+            al.add(rand.nextDouble() * 10000);
 
     }
 
     //------------------------------------------------------------------
     // printArrayList
     //------------------------------------------------------------------
-    private static void printArrayList(ArrayList<Integer> al)
+    private static void printArrayList(ArrayList<Double> al)
     {
 
         // Loop to print ArrayList
@@ -44,13 +44,13 @@ public class SortSearchers {
     //------------------------------------------------------------------
     // insertionSort
     //------------------------------------------------------------------
-    private static void insertionSort(ArrayList<Integer> al)
+    private static void insertionSort(ArrayList<Double> al)
     {
         int n = al.size();
 
         for (int i = 0; i < n; i++)
         {
-            int key = al.get(i);
+            double key = al.get(i);
             int j = i-1;
 
             while (j >= 0 && al.get(j) > key)
@@ -75,7 +75,7 @@ public class SortSearchers {
 
         Scanner keyboard = new Scanner(System.in);
 
-        ArrayList<Integer> arrList = new ArrayList<>();
+        ArrayList<Double> arrList = new ArrayList<>();
 
         System.out.println("Welcome to Sort Searchers!");
         System.out.println("--------------------------");
