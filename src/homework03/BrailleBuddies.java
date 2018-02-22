@@ -5,7 +5,6 @@ import java.util.Scanner;
 public class BrailleBuddies {
 
     // 3D array for braille characters
-    final String DELIM = "";
     final int[][][] BRAILLE_GRIDS =
             {
                     {{ 1, 0}, { 0, 0}, { 0, 0}},  // 'a' - 0
@@ -40,6 +39,8 @@ public class BrailleBuddies {
 
     public static void main(String[] args){
 
+        final String regexExp = "[\\d|\"|,|\\.|\']+";
+
         // Variables
         String userInput;
         Scanner keyboard = new Scanner(System.in);
@@ -51,9 +52,13 @@ public class BrailleBuddies {
         System.out.println();
         System.out.println("Enter a word or sentence below to be converted to braille: ");
         userInput = keyboard.nextLine();
-        while(userInput.matches("[\\d|\"]+")) {
-            System.out.println("Invalid input. Input should not contain any special characters or numbers.");
-            userInput = keyboard.nextLine();
+
+        for (int i = 0; i < userInput.length(); i++) {
+            char letter = userInput.charAt(i);
+            while (letter.matches(regexExp)) {
+                System.out.println("Invalid input. Input should not contain any special characters or numbers.");
+                userInput = keyboard.nextLine();
+            }
         }
 
         System.out.println(userInput);
