@@ -23,7 +23,7 @@ public class SortSearchers {
         // Loop to generate and store random numbers in ArrayList
         Random rand = new Random();
         for (int i = 1; i <= newElements; i++)
-            al.add(rand.nextDouble() * 10000);
+            al.add(rand.nextDouble() * 1000);
 
     }
 
