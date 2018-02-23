@@ -6,11 +6,11 @@ public class BrailleBuddies {
 
     // Format specifiers
     private static final String COL_LABEL = "%-13s";
-    private static final String COL_HEAD = "%2s";
-    private static final String COL_ROW = "%1d";
+    private static final String COL_HEAD = "%4s";
+    private static final String COL_ROW = "%2d";
 
     // 3D array for braille characters
-    static final int[][][] BRAILLE_GRIDS =
+    private static final int[][][] BRAILLE_GRIDS =
             {
                     {{ 1, 0}, { 0, 0}, { 0, 0}},  // 'a' - 0
                     {{ 1, 0}, { 1, 0}, { 0, 0}},  // 'b' - 1
@@ -46,6 +46,7 @@ public class BrailleBuddies {
         // to ASCII values to be used in 3D array
         for (int j = 0; j < input.length(); j++){
             arr[j] = input.charAt(j);
+            arr[j] = arr[j] - 97;
         }
     }
 
@@ -82,8 +83,53 @@ public class BrailleBuddies {
 
             fillArray(arr, userInput);
 
-            System.out.printf(COL_LABEL + COL_HEAD + "%n", "Character:", "h");
+            // Outputting the header of each column
+            System.out.printf(COL_LABEL, "Character:");
+            for (int i = 0; i < arr.length; i++) {
+                if (arr[i] >= 0)
+                    System.out.printf(COL_HEAD, userInput.charAt(i));
+                else if (arr[i] == -65)
+                    System.out.printf(COL_HEAD, " ");
+                else {
+                    System.out.printf(COL_HEAD, "UP");
+                    char temp = userInput.charAt(i);
+                    temp = Character.toLowerCase(temp);
+                    System.out.printf(COL_HEAD, temp);
+                }
+            }
+
+            System.out.println();
             System.out.printf(COL_LABEL, "Row 1:");
+            for (int i = 0; i < arr.length; i++) {
+                if (arr[i] >= 0)
+                    System.out.printf(COL_ROW + COL_ROW, BRAILLE_GRIDS[arr[i]][0][0], BRAILLE_GRIDS[arr[i]][0][1]);
+                else if (arr[i] == -65)
+                    System.out.printf(COL_HEAD, " ");
+                else
+                    System.out.printf(COL_ROW + COL_ROW, BRAILLE_GRIDS[26][0][0], BRAILLE_GRIDS[26][0][1]);
+            }
+
+            System.out.println();
+            System.out.printf(COL_LABEL, "Row 2:");
+            for (int i = 0; i < arr.length; i++) {
+                if (arr[i] >= 0)
+                    System.out.printf(COL_ROW + COL_ROW, BRAILLE_GRIDS[arr[i]][1][0], BRAILLE_GRIDS[arr[i]][1][1]);
+                else if (arr[i] == -65)
+                    System.out.printf(COL_HEAD, " ");
+                else
+                    System.out.printf(COL_ROW + COL_ROW, BRAILLE_GRIDS[26][0][0], BRAILLE_GRIDS[26][0][1]);
+            }
+
+            System.out.println();
+            System.out.printf(COL_LABEL, "Row 3:");
+            for (int i = 0; i < arr.length; i++) {
+                if (arr[i] >= 0)
+                    System.out.printf(COL_ROW + COL_ROW, BRAILLE_GRIDS[arr[i]][2][0], BRAILLE_GRIDS[arr[i]][2][1]);
+                else if (arr[i] == -65)
+                    System.out.printf(COL_HEAD, " ");
+                else
+                    System.out.printf(COL_ROW + COL_ROW, BRAILLE_GRIDS[26][0][0], BRAILLE_GRIDS[26][0][1]);
+            }
 
             System.out.println("Enter a word or sentence below to be converted to braille ('q' to exit): ");
             userInput = keyboard.nextLine();
