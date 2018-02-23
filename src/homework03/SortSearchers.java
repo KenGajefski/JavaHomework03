@@ -72,9 +72,7 @@ public class SortSearchers {
         int userAmount;
         long before;
         long after;
-
         Scanner keyboard = new Scanner(System.in);
-
         ArrayList<Double> arrList = new ArrayList<>();
 
         System.out.println("Welcome to Sort Searchers!");

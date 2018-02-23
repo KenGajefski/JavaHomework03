@@ -4,6 +4,11 @@ import java.util.Scanner;
 
 public class BrailleBuddies {
 
+    // Format specifiers
+    private static final String COL_LABEL = "%-13s";
+    private static final String COL_HEAD = "%2s";
+    private static final String COL_ROW = "%1d";
+
     // 3D array for braille characters
     static final int[][][] BRAILLE_GRIDS =
             {
@@ -36,16 +41,20 @@ public class BrailleBuddies {
                     {{ 0, 0}, { 0, 0}, { 0, 1}}   // upper case follows - 26
             };
 
+    private static void fillArray(int arr[], String input){
+        // Characters in the userInput string are being put into an Integer array, converting them
+        // to ASCII values to be used in 3D array
+        for (int j = 0; j < input.length(); j++){
+            arr[j] = input.charAt(j);
+        }
+    }
 
     public static void main(String[] args){
-
-        final String regexExp = "[\\d|\"|,|\\.|\']+";
 
         // Variables
         String userInput;
         Scanner keyboard = new Scanner(System.in);
-
-
+        int size;
 
         System.out.println("Welcome to Braille Buddies");
         System.out.println("--------------------------");
@@ -53,6 +62,7 @@ public class BrailleBuddies {
         System.out.println("Enter a word or sentence below to be converted to braille ('q' to exit): ");
         userInput = keyboard.nextLine();
 
+        // Sentinel loop
         while(!userInput.equals("q")) {
 
             // Validation loop
@@ -67,10 +77,16 @@ public class BrailleBuddies {
                 }
             }
 
-            System.out.println(userInput);
+            size = userInput.length();
+            int[] arr = new int[size];
+
+            fillArray(arr, userInput);
+
+            System.out.printf(COL_LABEL + COL_HEAD + "%n", "Character:", "h");
+            System.out.printf(COL_LABEL, "Row 1:");
+
             System.out.println("Enter a word or sentence below to be converted to braille ('q' to exit): ");
             userInput = keyboard.nextLine();
-
 
         }
 
