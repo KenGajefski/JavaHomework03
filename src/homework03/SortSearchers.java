@@ -7,11 +7,13 @@ import java.util.Scanner;
 // Main
 public class SortSearchers {
 
-    // Constant Variables
+    // Format specifiers
     private final static String firstColumn = "%-8s";
     private final static String secondColumn = "%10s";
     private final static String indexColumn = "%-8d";
     private final static String valueColumn = "%,10.2f";
+    private final static String statsLeft = "%-30s";
+    private final static String statsRight = "%10d";
 
     //------------------------------------------------------------------
     // randomizeArrayList
@@ -42,36 +44,17 @@ public class SortSearchers {
     }
 
     //------------------------------------------------------------------
-    // insertionSort
-    //------------------------------------------------------------------
-    private static void insertionSort(ArrayList<Double> al)
-    {
-        int n = al.size();
-
-        for (int i = 0; i < n; i++)
-        {
-            double key = al.get(i);
-            int j = i-1;
-
-            while (j >= 0 && al.get(j) > key)
-            {
-                al.set(j + 1, al.get(j));
-                j = j - 1;
-            }
-
-            al.set(j + 1, key);
-        }
-    }
-
-    //------------------------------------------------------------------
     // Main
     //------------------------------------------------------------------
     public static void main(String[] args) {
 
         // Variables
         int userAmount;
+        int swaps = 0;
+        int cycles = 0;
         long before;
         long after;
+        long sortTime;
         Scanner keyboard = new Scanner(System.in);
         ArrayList<Double> arrList = new ArrayList<>();
 
@@ -97,9 +80,29 @@ public class SortSearchers {
 
         // Sorting array list and tracking time to do it in nanoseconds
         before = System.nanoTime();
-        insertionSort(arrList);
+        int n = arrList.size();
+        for (int i = 0; i < n; i++)
+        {
+            double key = arrList.get(i);
+            int j = i-1;
+
+            while (j >= 0 && arrList.get(j) > key)
+            {
+                arrList.set(j + 1, arrList.get(j));
+                j = j - 1;
+                swaps++;
+                cycles++;
+            }
+
+            arrList.set(j + 1, key);
+            cycles++;
+        }
         after = System.nanoTime();
-        System.out.println("Time to sort through array (in nanoseconds): " + (after - before));
+        sortTime = (after - before);
+
+        System.out.printf(statsLeft + statsRight + "%n", "Time to sort(in nanoseconds): ", sortTime);
+        System.out.printf(statsLeft + statsRight + "%n", "Amount of cycles: ", cycles);
+        System.out.printf(statsLeft + statsRight + "%n", "Amount of swaps: ", swaps);
 
         System.out.println("First 10 sorted values in array list");
         printArrayList(arrList);
